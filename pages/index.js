@@ -1,10 +1,12 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0";
 
 export default function Home() {
   const { user, error, isLoading } = useUser();
+  const { avatar } = user.picture;
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
   console.log(user);
@@ -30,12 +32,9 @@ export default function Home() {
               <>
                 <p className={styles.description}>Home Content</p>
                 <br />
-
-                <img src={user.picture} alt="" width={100} height={100} />
-
+                <Image src={avatar} />
                 <h3 className={styles.description}>Welcome {user.name}</h3>
                 <p>{user.email}</p>
-
                 <Link href="/api/auth/logout">
                   <button className={styles.button}>LOGOUT</button>
                 </Link>
