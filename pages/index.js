@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/link-passhref */
+/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
@@ -6,7 +9,6 @@ import { useUser } from "@auth0/nextjs-auth0";
 
 export default function Home() {
   const { user, error, isLoading } = useUser();
-  const { avatar } = user.picture;
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
   console.log(user);
@@ -32,7 +34,7 @@ export default function Home() {
               <>
                 <p className={styles.description}>Home Content</p>
                 <br />
-                <Image src={avatar} />
+                <img src={user.picture} width={100} height={100} />
                 <h3 className={styles.description}>Welcome {user.name}</h3>
                 <p>{user.email}</p>
                 <Link href="/api/auth/logout">
